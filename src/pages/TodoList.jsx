@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles'
+import { observer, inject } from 'mobx-react'
 import TodoBox from '../components/TodoBox'
 
 const styles = theme => ({
@@ -11,33 +12,55 @@ const styles = theme => ({
   }
 })
 
-const TodoList = () => {
-  return (
-    <div>
-      <Grid container>
-        <Grid container item xs={12} justify="center">
-          <Grid item xs={4}>
-            <TextField id="standard-name" label="" margin="normal" fullWidth />
+@inject('store')
+@observer
+class TodoList extends Component {
+  render() {
+    const { store } = this.props
+    return (
+      <div>
+        <Grid container>
+          <Grid container item xs={12} justify="center">
+            <Grid item xs={4}>
+              <TextField
+                id="standard-name"
+                label=""
+                margin="normal"
+                fullWidth
+                value={store.textTitle}
+                onChange={store.handleChangeTextTitle}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <Button
+                variant="contained"
+                onClick={store.addItem({
+                  title: store.textTitle,
+                  checked: false
+                })}
+              >
+                ADD
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item xs={4}>
-            <Button variant="contained">ADD</Button>
+          <Grid item xs={6}>
+            <TodoBox
+              ListTitle="Doing"
+              TodoData={store.doingList}
+              handleChange={store.checkItem}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TodoBox
+              ListTitle="Done"
+              TodoData={store.doneList}
+              handleChange={store.checkItem}
+            />
           </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <TodoBox
-            ListTitle="Doing"
-            TodoData={[{ checked: false, title: 'rtyhrt' }]}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <TodoBox
-            ListTitle="Done"
-            TodoData={[{ checked: true, title: 'rtyhrt' }]}
-          />
-        </Grid>
-      </Grid>
-    </div>
-  )
+      </div>
+    )
+  }
 }
 
 export default withStyles(styles)(TodoList)

@@ -18,24 +18,28 @@ const TodoBox = ({
   TodoData,
   handleChange,
   handleEdit
-}) => (
-  <Paper style={{ margin: '24px' }}>
-    <Toolbar className={classes.toolbar}>
-      <Typography variant="h5" style={{ color: '#fff' }}>
-        {ListTitle}
-      </Typography>
-    </Toolbar>
-    <List>
-      {TodoData.map(({ title, checked }) => (
-        <TodoItem
-          TodoChecked={checked}
-          title={title}
-          handleChange={handleChange}
-          handleEdit={handleEdit}
-        />
-      ))}
-    </List>
-  </Paper>
-)
+}) => {
+  return (
+    <Paper style={{ margin: '24px' }}>
+      <Toolbar className={classes.toolbar}>
+        <Typography variant="h5" style={{ color: '#fff' }}>
+          {ListTitle}
+        </Typography>
+      </Toolbar>
+      <List>
+        {TodoData.map(({ title, checked, id }) => (
+          <TodoItem
+            TodoChecked={checked}
+            title={title}
+            id={id}
+            handleChange={handleChange}
+            handleEdit={handleEdit}
+            key={id}
+          />
+        ))}
+      </List>
+    </Paper>
+  )
+}
 
 export default withStyles(styles)(TodoBox)
