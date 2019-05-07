@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles'
 import { observer, inject } from 'mobx-react'
 import TodoBox from '../components/TodoBox'
+import DialogEdit from '../components/DialogEdit'
 
 const styles = theme => ({
   toolbar: {
@@ -19,6 +20,14 @@ class TodoList extends Component {
     const { store } = this.props
     return (
       <div>
+        <DialogEdit
+          open={store.dialogToggle}
+          saveItem={store.saveItem}
+          handleChange={store.handleDialogEditChange}
+          removeItem={() => store.removeItem(store.editId)}
+          closeDialog={() => store.toggleDialog('')}
+          title={store.dialogEdit}
+        />
         <Grid container>
           <Grid container item xs={12} justify="center">
             <Grid item xs={4}>
@@ -48,6 +57,7 @@ class TodoList extends Component {
               ListTitle="Doing"
               TodoData={store.doingList}
               handleChange={store.checkItem}
+              handleEdit={store.toggleDialog}
             />
           </Grid>
           <Grid item xs={6}>
@@ -55,6 +65,7 @@ class TodoList extends Component {
               ListTitle="Done"
               TodoData={store.doneList}
               handleChange={store.checkItem}
+              handleEdit={store.toggleDialog}
             />
           </Grid>
         </Grid>

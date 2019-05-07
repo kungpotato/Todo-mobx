@@ -17,6 +17,9 @@ class TodoStore {
   @observable
   dialogEdit = ''
 
+  @observable
+  editId = ''
+
   @computed
   get doingList() {
     return this.todoList.filter(each => each.checked === false)
@@ -38,8 +41,13 @@ class TodoStore {
   }
 
   @action.bound
-  toggleDialog() {
+  toggleDialog(id) {
     this.dialogToggle = !this.dialogToggle
+    this.editId = id
+    const item = this.todoList.find(each => each.id === id)
+    if (item) {
+      this.dialogEdit = item.title
+    }
   }
 
   checkItem = id => () => {
@@ -51,9 +59,20 @@ class TodoStore {
 
   addItem = ({ title, checked }) => () => {
     runInAction(() => {
-      console.log('work')
       this.todoList.push(new TodoItem({ title, checked, id: uuid() }))
+      this.textTitle = ''
     })
+  }
+
+  @action.bound
+  saveItem() {
+    const item = this.todoList.find(each => each.id === this.editId)
+    if (item) {
+      item.editTitle(this.dialogEdit)
+    } else {
+      console.error('item not found')
+    }
+    this.toggleDialog('')
   }
 
   @action.bound
@@ -64,6 +83,7 @@ class TodoStore {
     } else {
       console.error('item not found')
     }
+    this.toggleDialog('')
   }
 }
 

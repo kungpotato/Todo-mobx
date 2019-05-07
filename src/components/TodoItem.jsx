@@ -8,7 +8,7 @@ const TodoItem = ({ TodoChecked, handleChange, title, handleEdit, id }) => (
   <ListItem>
     <Checkbox checked={TodoChecked} onChange={handleChange(id)} value="" />
     <ListItemText primary={title} />
-    <Button onClick={handleEdit}>Edit</Button>
+    <Button onClick={() => handleEdit(id)}>Edit</Button>
   </ListItem>
 )
 
