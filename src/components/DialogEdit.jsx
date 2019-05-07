@@ -26,12 +26,16 @@ const style = {
 @observer
 class DialogEdit extends Component {
   @observable
+  colorBG = ''
+
+  @observable
   dialogOpen = false
 
   @action
   handleChangeComplete = ({ hex }) => {
     const { handleChangeColor } = this.props
     handleChangeColor({ target: { value: hex } })
+    this.colorBG = hex
   }
 
   @action.bound
