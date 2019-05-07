@@ -55,7 +55,9 @@ class TodoStore {
     const item = this.todoList.find(each => each.id === id)
     if (item) {
       this.dialogEdit = item.title
-      this.editBackGroundColor = item.editBackGroundColor
+      this.colorBackGround = item.editBackGroundColor
+    } else {
+      console.error('notfound', id)
     }
   }
 

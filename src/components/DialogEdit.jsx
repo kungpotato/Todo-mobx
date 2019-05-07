@@ -40,7 +40,13 @@ class DialogEdit extends Component {
 
   @action.bound
   toggleDialog() {
+    const { colorBackGround } = this.props
     this.dialogOpen = !this.dialogOpen
+    if (this.dialogOpen) {
+      this.colorBG = colorBackGround
+    } else {
+      this.colorBG = ''
+    }
   }
 
   render() {
