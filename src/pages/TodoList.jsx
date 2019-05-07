@@ -24,9 +24,11 @@ class TodoList extends Component {
           open={store.dialogToggle}
           saveItem={store.saveItem}
           handleChange={store.handleDialogEditChange}
+          handleChangeColor={store.handleChangeColor}
           removeItem={() => store.removeItem(store.editId)}
           closeDialog={() => store.toggleDialog('')}
           title={store.dialogEdit}
+          colorBackGround={store.colorBackGround}
         />
         <Grid container>
           <Grid container item xs={12} justify="center">

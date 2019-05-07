@@ -17,7 +17,8 @@ const TodoBox = ({
   ListTitle,
   TodoData,
   handleChange,
-  handleEdit
+  handleEdit,
+  handleChangeColor
 }) => {
   return (
     <Paper style={{ margin: '24px' }}>
@@ -27,7 +28,7 @@ const TodoBox = ({
         </Typography>
       </Toolbar>
       <List>
-        {TodoData.map(({ title, checked, id }) => (
+        {TodoData.map(({ title, checked, id, editBackGroundColor }) => (
           <TodoItem
             TodoChecked={checked}
             title={title}
@@ -35,6 +36,8 @@ const TodoBox = ({
             handleChange={handleChange}
             handleEdit={handleEdit}
             key={id}
+            colorBackGround={editBackGroundColor}
+            handleChangeColor={handleChangeColor}
           />
         ))}
       </List>

@@ -5,6 +5,9 @@ class TodoItem {
   title = ''
 
   @observable
+  editBackGroundColor = ''
+
+  @observable
   checked = false
 
   id = ''
@@ -23,6 +26,11 @@ class TodoItem {
   @action.bound
   editTitle(newTitle) {
     this.title = newTitle
+  }
+
+  @action.bound
+  editColor(newColor) {
+    this.editBackGroundColor = newColor
   }
 }
 

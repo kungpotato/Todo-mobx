@@ -20,6 +20,9 @@ class TodoStore {
   @observable
   editId = ''
 
+  @observable
+  colorBackGround = ''
+
   @computed
   get doingList() {
     return this.todoList.filter(each => each.checked === false)
@@ -28,6 +31,11 @@ class TodoStore {
   @computed
   get doneList() {
     return this.todoList.filter(each => each.checked === true)
+  }
+
+  @action.bound
+  handleChangeColor({ target: { value } }) {
+    this.colorBackGround = value
   }
 
   @action.bound
@@ -47,6 +55,7 @@ class TodoStore {
     const item = this.todoList.find(each => each.id === id)
     if (item) {
       this.dialogEdit = item.title
+      this.editBackGroundColor = item.editBackGroundColor
     }
   }
 
@@ -69,6 +78,7 @@ class TodoStore {
     const item = this.todoList.find(each => each.id === this.editId)
     if (item) {
       item.editTitle(this.dialogEdit)
+      item.editColor(this.colorBackGround)
     } else {
       console.error('item not found')
     }

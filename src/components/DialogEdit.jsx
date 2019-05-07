@@ -25,13 +25,26 @@ const DialogEdit = ({
   removeItem,
   closeDialog,
   handleChange,
-  title
+  title,
+  colorBackGround,
+  handleChangeColor
 }) => (
   <Dialog open={open}>
     <Paper style={style.dialogStyle}>
       <Grid container style={{ padding: '24px' }}>
         <Grid item xs={6}>
-          <TextField fullWidth value={title} onChange={handleChange} />
+          <TextField
+            fullWidth
+            label="Title"
+            value={title}
+            onChange={handleChange}
+          />
+          <TextField
+            fullWidth
+            label="color code"
+            value={colorBackGround}
+            onChange={handleChangeColor}
+          />
         </Grid>
         <Grid item xs={6}>
           <Button
