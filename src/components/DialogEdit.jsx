@@ -33,8 +33,6 @@ class DialogEdit extends Component {
 
   @action
   handleChangeComplete = ({ hex }) => {
-    const { handleChangeColor } = this.props
-    handleChangeColor({ target: { value: hex } })
     this.colorBG = hex
   }
 
@@ -45,6 +43,8 @@ class DialogEdit extends Component {
     if (this.dialogOpen) {
       this.colorBG = colorBackGround
     } else {
+      const { handleChangeColor } = this.props
+      handleChangeColor({ target: { value: this.colorBG } })
       this.colorBG = ''
     }
   }
